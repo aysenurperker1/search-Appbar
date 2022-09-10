@@ -9,12 +9,6 @@ class CharactersSearch extends SearchDelegate<String> {
     'assets/images/logan.jpg',
   ];
 
-  final recentCities = [
-    'Berlin',
-    'Munich',
-    'London',
-  ];
-
   @override
   List<Widget> buildActions(BuildContext context) => [
         IconButton(
@@ -37,13 +31,16 @@ class CharactersSearch extends SearchDelegate<String> {
       );
 
   @override
-  Widget buildResults(BuildContext context) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.location_city, size: 120),
-            const SizedBox(height: 48),
-            Text(
+  Widget buildResults(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.person_pin_outlined,
+            size: 120,
+            color: Colors.black,
+          ),
+          Center(
+            child: Text(
               query,
               style: const TextStyle(
                 color: Colors.black,
@@ -51,19 +48,19 @@ class CharactersSearch extends SearchDelegate<String> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       );
 
   @override
   Widget buildSuggestions(BuildContext context) {
     final suggestions = query.isEmpty
-        ? recentCities
-        : characters.where((city) {
-            final cityLower = city.toLowerCase();
+        ? characters
+        : characters.where((character) {
+            final characterLower = character.toLowerCase();
             final queryLower = query.toLowerCase();
 
-            return cityLower.startsWith(queryLower);
+            return characterLower.startsWith(queryLower);
           }).toList();
 
     return buildSuggestionsSuccess(suggestions);
@@ -82,7 +79,9 @@ class CharactersSearch extends SearchDelegate<String> {
 
               showResults(context);
             },
-            leading: const Icon(Icons.location_city),
+            leading: CircleAvatar(
+              backgroundImage: AssetImage(CharactersSearch().images[index]),
+            ),
             title: RichText(
               text: TextSpan(
                 text: queryText,

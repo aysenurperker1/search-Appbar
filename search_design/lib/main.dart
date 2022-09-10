@@ -13,7 +13,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static const String title = 'CITY SEARCH';
+  static const String title = 'CHARACTERS ';
 
   const MyApp({Key? key}) : super(key: key);
 
@@ -21,11 +21,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: title,
-        theme: ThemeData(
-            colorScheme: const ColorScheme.dark(),
-            primarySwatch: Colors.deepOrange,
-            appBarTheme: const AppBarTheme(centerTitle: true, backgroundColor: Colors.white),
-            iconTheme: const IconThemeData(color: Colors.black87)),
+        theme: ThemeData.light().copyWith(
+            //  appBarTheme: const AppBarTheme(centerTitle: true, backgroundColor: Colors.white),
+            iconTheme: const IconThemeData(color: Colors.white),
+            appBarTheme: const AppBarTheme(color: Colors.red)),
         home: const LocalSearchAppBarPage(title: title),
       );
 }
